@@ -81,6 +81,10 @@
     <Folder Include="Properties\" />
     <Folder Include="Resources\Styles\Custom\" />
   </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Modules\CommandsAndEvents\CommandsAndEventsModule.ts" />
+    <TypeScriptCompile Include="Modules\CommandsAndEvents\CommandsAndEventsView.ts" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -107,4 +111,22 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>
+      java -jar "$(SolutionDir)Tools\ResourceCompilerTool.jar" "$(SolutionDir)QuickStart\ResourceManifest.xml" "$(SolutionDir)QuickStart" "Custom" "$(SolutionDir)QuickStart\Resources\Compiled\Custom.js" --export "$(SolutionDir)Web\Resources\Locales" --msbuild --nocomments
+      IF NOT ERRORLEVEL 0 EXIT 1
+
+      move "$(SolutionDir)Web\Resources\Locales\Invariant.json" "$(SolutionDir)Web\Resources\Locales\Custom.en-US.json.js"
+      IF NOT ERRORLEVEL 0 EXIT 1
+
+      move "$(SolutionDir)custom_ts_out.js.map" "$(SolutionDir)QuickStart\Resources\Compiled\Custom_ts_out.js.map"
+      IF NOT ERRORLEVEL 0 EXIT 1
+
+      copy "$(SolutionDir)QuickStart\Modules\CommandsAndEvents\*.ts" "$(SolutionDir)Custom\Resources\Compiled\"
+      IF NOT ERRORLEVEL 0 EXIT 1
+
+      ECHO D | xcopy /E /Y /D "$(SolutionDir)QuickStart\Resources" "$(SolutionDir)Web\Libraries\Custom"
+      IF NOT ERRORLEVEL 0 EXIT 1
+</PostBuildEvent>
+  </PropertyGroup>
 </Project>

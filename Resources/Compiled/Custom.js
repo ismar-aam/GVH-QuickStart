@@ -1,0 +1,2 @@
+﻿
+geocortex.framework.notifyLibraryDownload("Custom");
