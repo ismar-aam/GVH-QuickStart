@@ -1,0 +1,80 @@
+﻿/* This module-specific CSS will be compiled into the library that this module belongs to. It will be 
+ * base64-encoded. When the application loads, all CSS styles in the library will be injected into the page. */
+
+.sample-content h2 {
+    font-size: 1.3em;
+}
+
+.sample-content p {
+    margin: 1em 0 0 0;
+}
+
+.sample-content .section {
+    padding: 1em 0;
+    border-bottom: 1px solid #CCCCCC;
+}
+
+    .sample-content .section:last-child {
+        border: none;
+    }
+
+.text-content {
+    padding: 0 1em;
+}
+
+.example {
+    display: inline-block;
+    margin: 1em 0 0 0;
+    padding: .75em;
+    background-color: #EEEEEE;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px;
+    clear: both;
+}
+
+    .example p, .example div.form-btns button {
+        margin: .5em 0;
+    }
+
+    .example div.form-btns button {
+        min-width: 300px;
+        text-align: center;
+    }
+
+    .example div.form-btns {
+        text-align: left;
+    }
+
+.modal-container {
+    padding: 1em;
+    min-width: 300px;
+}
+
+button {
+    cursor: pointer;
+}
+
+.sample-content li {
+    line-height: 1.5em;
+    font-weight: normal;
+    font-size: 1em;
+    color: black;
+    list-style-type: none;
+}
+
+    .sample-content li:before {
+        content: "» ";
+        color: #1A72C4;
+        font-size: 1.4em;
+    }
+
+.section > ul > li {
+    color: #555555;
+    font-weight: bold;
+    font-size: 1.1em;
+    list-style-type: none;
+}
+
+    .section > ul > li:before {
+        content: " ";
+    }

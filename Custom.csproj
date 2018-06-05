@@ -10,8 +10,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TypeScriptHTMLApp1</RootNamespace>
-    <AssemblyName>TypeScriptHTMLApp1</AssemblyName>
+    <RootNamespace>QuickStart</RootNamespace>
+    <AssemblyName>QuickStart</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -69,6 +69,8 @@
     <TypeScriptSourceRoot />
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="Modules\CommandsAndEvents\CommandsAndEvents.css" />
+    <Content Include="Modules\CommandsAndEvents\CommandsAndEventsView.html" />
     <Content Include="Resources\Config\Default.json.js" />
   </ItemGroup>
   <ItemGroup>
@@ -84,6 +86,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="Modules\CommandsAndEvents\CommandsAndEventsModule.ts" />
     <TypeScriptCompile Include="Modules\CommandsAndEvents\CommandsAndEventsView.ts" />
+    <TypeScriptCompile Include="Modules\CommandsAndEvents\CommandsAndEventsViewModel.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -112,21 +115,10 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>
-      java -jar "$(SolutionDir)Tools\ResourceCompilerTool.jar" "$(SolutionDir)QuickStart\ResourceManifest.xml" "$(SolutionDir)QuickStart" "Custom" "$(SolutionDir)QuickStart\Resources\Compiled\Custom.js" --export "$(SolutionDir)Web\Resources\Locales" --msbuild --nocomments
-      IF NOT ERRORLEVEL 0 EXIT 1
+    <PostBuildEvent>npm run build
 
-      move "$(SolutionDir)Web\Resources\Locales\Invariant.json" "$(SolutionDir)Web\Resources\Locales\Custom.en-US.json.js"
-      IF NOT ERRORLEVEL 0 EXIT 1
 
-      move "$(SolutionDir)custom_ts_out.js.map" "$(SolutionDir)QuickStart\Resources\Compiled\Custom_ts_out.js.map"
-      IF NOT ERRORLEVEL 0 EXIT 1
 
-      copy "$(SolutionDir)QuickStart\Modules\CommandsAndEvents\*.ts" "$(SolutionDir)Custom\Resources\Compiled\"
-      IF NOT ERRORLEVEL 0 EXIT 1
-
-      ECHO D | xcopy /E /Y /D "$(SolutionDir)QuickStart\Resources" "$(SolutionDir)Web\Libraries\Custom"
-      IF NOT ERRORLEVEL 0 EXIT 1
 </PostBuildEvent>
   </PropertyGroup>
 </Project>

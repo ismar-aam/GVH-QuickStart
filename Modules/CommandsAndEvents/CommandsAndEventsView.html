@@ -1,0 +1,64 @@
+﻿<div class="sample-content text-content">
+    <div class="section">
+        <h2>Commands</h2>
+
+        <p><a href="./../commands-help/index.html" target="_blank">Commands</a> provide a way to invoke application functionality without knowing or caring about the origin of its implementation.</p>
+
+        <ul>
+            <li>
+                Geocortex Framework Commands:
+                <ul>
+                    <li>Live in the <a href="./../api-help/classes/_framework_amd_d_._geocortex_framework_commands_commandregistry_.commandregistry.html" target="_blank">CommandRegistry</a> of your <a href="./../api-help/classes/_mapping_infrastructure_amd_d_._geocortex_infrastructure_viewer_.viewerapplication.html" target="_blank">Application</a> instance,</li>
+                    <li>Are referenced by name like so: "app.commandRegistry.command('{COMMANDNAME}')",</li>
+                    <li>May have zero or more implementations registered via a "register" method,</li>
+                    <li>Are invoked via an "execute" method,</li>
+                    <li>Invoke potentially multiple implementations in the order they were registered, and </li>
+                    <li>Are created on the fly, that is, referencing a command through the <a href="./../api-help/classes/_framework_amd_d_._geocortex_framework_commands_commandregistry_.commandregistry.html" target="_blank">CommandRegistry</a> will always give you an instance.</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Events</h2>
+
+        <p><a href="./../commands-help/index.html" target="_blank">Events</a>, in a similar manner to commands, provide a way to react to things that happen in an application without being coupled to the source of the event.</p>
+
+        <p>
+            Framework events differ from DOM and dojo events in that they are not global. Framework events exist inside a particular <a href="./../api-help/classes/_mapping_infrastructure_amd_d_._geocortex_infrastructure_viewer_.viewerapplication.html" target="_blank">Application</a> instance, allowing
+            multiple Framework applications to co-exist on the same page without interfering with each other's events.
+        </p>
+        <ul>
+            <li>
+                Geocortex Framework Events:
+                <ul>
+                    <li>Live in the <a href="./../api-help/classes/_framework_amd_d_._geocortex_framework_events_eventregistry_.eventregistry.html" target="_blank">EventRegistry</a> of your <a href="./../api-help/classes/_mapping_infrastructure_amd_d_._geocortex_infrastructure_viewer_.viewerapplication.html" target="_blank">Application</a> instance,</li>
+                    <li>Are referenced by name, for example: "app.eventRegistry.event('{EVENTNAME}')",</li>
+                    <li>May have zero or more handlers registered via a "subscribe" method,</li>
+                    <li>Have a "once" method for registering one-time only handlers,</li>
+                    <li>Are raised via a "publish" method,</li>
+                    <li>Have handlers that are invoked in the order they were registered, and</li>
+                    <li>Are created on the fly, that is, referencing an event through the <a href="./../api-help/classes/_framework_amd_d_._geocortex_framework_events_eventregistry_.eventregistry.html" target="_blank">EventRegistry</a> will always give you an instance.</li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="example">
+            <p>Pressing this button will execute a command that displays an alert. The command implementation will then publish an event, to which the view model reacts by displaying text beneath the button:</p>
+            <div class="form-btns">
+                <button class="button" data-binding="{@event-onclick: handleClickExample}">Click to display message</button>
+            </div>
+            <p data-binding="{@visible: eventMessage}">
+                <strong>The command message displayed was:</strong> <span data-binding="{@text: eventMessage}" />
+            </p>
+        </div>
+
+    </div>
+
+</div>
+<div data-region-name="StandaloneModalWindowRegion" class="region modal standalone-modal" data-region-adapter="geocortex.framework.ui.PopupModalRegionAdapter">
+    <div class="modal-overlay"></div>
+    <div class="modal-container" data-binding="{@var: modalContainerElement}">
+        <div class="modal-container-inner"></div>
+    </div>
+</div>
